@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adji Fatou Gueye - Portfolio</title>
+    <!-- Inclure Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #c9d9ff 0%, #e0eafc 50%, #f0f7ff 100%);
+            color: #1e3a8a;
+            line-height: 1.7;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #172033 0%, #2d3b55 50%, #4b5e7e 100%);
+            color: #e2e8f0;
+        }
+
+        /* Particules dynamiques */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, rgba(96, 165, 250, 0.7), transparent);
+            border-radius: 50%;
+            animation: floatGlow 6s ease-in-out infinite;
+        }
+
+        body.dark-mode .particle {
+            background: radial-gradient(circle, rgba(147, 197, 253, 0.7), transparent);
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translateY(100vh) scale(0.7); opacity: 0.4; }
+            50% { opacity: 1; transform: translateY(50vh) scale(1.1); }
+            100% { transform: translateY(-20vh) scale(0.9); opacity: 0; }
+        }
+
+        /* Palette de couleurs */
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #60a5fa;
+            --accent: #2563eb;
+            --gray: #64748b;
+            --white: rgba(255, 255, 255, 0.97);
+            --dark-bg: rgba(23, 32, 51, 0.97);
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            --glow: 0 0 25px rgba(96, 165, 250, 0.8);
+        }
+
+        /* Animations générales */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes zoomSpin {
+            0% { opacity: 0; transform: scale(0.6) rotate(-10deg); }
+            70% { transform: scale(1.05) rotate(5deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0); }
+        }
+
+        /* Animations spécifiques */
+        @keyframes slidePulse {
+            0% { opacity: 0; transform: translateX(-80px) scale(0.9); }
+            50% { opacity: 1; transform: translateX(10px) scale(1.02); }
+            100% { opacity: 1; transform: translateX(0) scale(1); box-shadow: var(--glow); }
+        }
+
+        @keyframes flipGlow {
+            0% { opacity: 0; transform: rotateY(90deg) scale(0.8); }
+            60% { opacity: 1; transform: rotateY(-15deg) scale(1.05); }
+            100% { opacity: 1; transform: rotateY(0) scale(1); box-shadow: var(--glow); }
+        }
+
+        @keyframes bounceReveal {
+            0% { opacity: 0; transform: scale(0.5) translateY(50px); }
+            50% { opacity: 1; transform: scale(1.15) translateY(-20px); }
+            75% { transform: scale(0.95) translateY(5px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); box-shadow: var(--glow); }
+        }
+
+        @keyframes rippleWave {
+            0% { opacity: 0; transform: scale(0.3); clip-path: circle(0% at 50% 50%); }
+            50% { opacity: 1; transform: scale(1.1); clip-path: circle(60% at 50% 50%); }
+            100% { opacity: 1; transform: scale(1); clip-path: circle(100% at 50% 50%); box-shadow: var(--glow); }
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            backdrop-filter: blur(18px);
+            padding: 1.8rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            border-bottom: 3px solid rgba(96, 165, 250, 0.4);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        body.dark-mode header {
+            background: var(--dark-bg);
+            border-bottom: 3px solid rgba(147, 197, 253, 0.4);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 1.5px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            animation: headerPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes headerPulse {
+            0%, 100% {
+                transform: scale(1);
+                text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+                color: var(--primary);
+            }
+            50% {
+                transform: scale(1.05);
+                text-shadow: 0 0 20px var(--secondary);
+                color: var(--secondary);
+            }
+        }
+
+        body.dark-mode header h1 {
+            color: #e2e8f0;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            margin-top: 20px;
+        }
+
+        header nav ul li a {
+            font-size: 1.2rem;
+            color: var(--gray);
+            text-decoration: none;
+            padding: 12px 20px;
+            transition: all 0.4s ease;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        body.dark-mode header nav ul li a {
+            color: #e2e8f0;
+        }
+
+        header nav ul li a:hover {
+            color: var(--secondary);
+            background: rgba(96, 165, 250, 0.35);
+            transform: translateY(-4px);
+            box-shadow: var(--glow);
+        }
+
+        header nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--secondary);
+            transition: width 0.4s ease;
+            transform: translateX(-50%);
+        }
+
+        header nav ul li a:hover::after {
+            width: 70%;
+        }
+
+        #theme-toggle {
+            position: absolute;
+            top: 1.8rem;
+            right: 1.8rem;
+            background: var(--secondary);
+            border: none;
+            padding: 14px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.25);
+            box-shadow: var(--glow);
+        }
+
+        body.dark-mode #theme-toggle {
+            background: var(--accent);
+        }
+
+        /* Main */
+        main {
+            padding: 120px 50px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section {
+            background: var(--white);
+            border-radius: 30px;
+            padding: 35px;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            opacity: 1;
+        }
+
+        body.dark-mode section {
+            background: var(--dark-bg);
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: -60%;
+            left: -60%;
+            width: 220%;
+            height: 220%;
+            background: radial-gradient(circle, rgba(96, 165, 250, 0.2), transparent 60%);
+            animation: rotateGlow 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode section h2 {
+            color: #e2e8f0;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 70px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            transform: translateX(-50%);
+            border-radius: 3px;
+            animation: expandLine 1.2s ease forwards;
+        }
+
+        @keyframes expandLine {
+            0% { width: 0; }
+            100% { width: 70px; }
+        }
+
+        section p {
+            font-size: 1.4rem;
+            color: var(--gray);
+            position: relative;
+            z-index: 1;
+        }
+
+        body.dark-mode section p {
+            color: #e2e8f0;
+        }
+
+        #profil {
+            text-align: center;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 7px solid var(--secondary);
+            margin: 0 auto 30px;
+            display: block;
+            box-shadow: var(--shadow);
+            transition: all 0.5s ease;
+            animation: zoomSpin 1.4s ease forwards, floatSlow 6s ease-in-out infinite;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.2) rotate(8deg);
+            box-shadow: var(--glow);
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        #apropos {
+            animation: slidePulse 1.2s ease forwards;
+        }
+
+        #identite {
+            animation: flipGlow 1.2s ease forwards;
+        }
+
+        #parcours {
+            animation: bounceReveal 1.2s ease forwards;
+        }
+
+        #projets {
+            animation: rippleWave 1.2s ease forwards;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 35px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: #fff;
+            text-decoration: none;
+            border-radius: 15px;
+            margin: 20px 10px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .btn:hover::before {
+            width: 400%;
+            height: 400%;
+        }
+
+        .btn:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--glow);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #fff;
+            padding: 35px;
+            text-align: center;
+            margin-top: 50px;
+            box-shadow: var(--shadow);
+            animation: fadeIn 1s ease forwards;
+        }
+
+        footer h3 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        footer p {
+            font-size: 1.4rem;
+            margin: 10px 0;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.4s ease;
+        }
+
+        footer a:hover {
+            color: var(--secondary);
+        }
+
+        /* Icônes sociales */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            font-size: 2rem;
+            color: #fff;
+            transition: all 0.4s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: var(--secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            header nav ul { gap: 25px; }
+            header nav ul li a { font-size: 1rem; padding: 10px 15px; }
+            section h2 { font-size: 2rem; }
+            section p { font-size: 1.2rem; }
+            .profile-photo { width: 160px; height: 160px; }
+            .btn { padding: 15px 30px; font-size: 1.1rem; }
+            footer h3 { font-size: 2rem; }
+            .social-icons a { font-size: 1.8rem; }
+        }
+    </style>
+    <style>
+        @keyframes nameEntry {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes nameExit {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+        }
+        .animated-name {
+            animation: nameEntry 1.5s ease forwards;
+        }
+        .animated-name.exit {
+            animation: nameExit 1.5s ease forwards;
+        }
+        /* Loop entry and exit animation */
+        @keyframes nameLoopEntry {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes nameLoopExit {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+        }
+        .animated-name.loop-entry {
+            animation: nameLoopEntry 2s ease forwards;
+        }
+        .animated-name.loop-exit {
+            animation: nameLoopExit 2s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="particles">
+        <div class="particle" style="left: 15%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 35%; animation-delay: 1.5s;"></div>
+        <div class="particle" style="left: 55%; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 75%; animation-delay: 4.5s;"></div>
+        <div class="particle" style="left: 95%; animation-delay: 2s;"></div>
+    </div> -->
+
+
+    <header>
+        <h1>Explorez Mon Univers Crèatif</h1>
+        <nav>
+            <ul>
+                <li><a href="#apropos">À propos</a></li>
+                <li><a href="#identite">Coordonnées</a></li>
+                <li><a href="#parcours">Parcours</a></li>
+                <li><a href="#projets">Projets</a></li>
+                <li><a href="#message">Contactez-moi</a></li>
+                <li><a href="Mon Cv.pdf" download>CV</a></li>
+            </ul>
+        </nav>
+        <button id="theme-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M12 2a10 10 0 0 0-10 10c0 5.52 4.48 10 10 10s10-4.48 10-10A10 10 0 0 0 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-14h2v6h-2zm0 8h2v2h-2z"/>
+            </svg>
+        </button>
+    </header>
+
+    <main>
+        <section id="profil">
+            <img src="Adja.jpg" alt="Photo de profil" class="profile-photo">
+            <h2 class="animated-name">Adji Fatou Gueye</h2>
+            <p>Étudiante en Génie Informatique à Unipro, passionnée par la Cyber Sècuritè et l'innovation technologies.</p>
+            <div>
+                <a href="#apropos" class="btn">Découvrir</a>
+                <a href="Mon Cv.pdf" download class="btn">Télécharger CV</a>
+            </div>
+        </section>
+
+        <section id="apropos">
+            <h2><i class="fas fa-user-circle" style="color: var(--secondary); margin-right: 10px;"></i>À propos</h2>
+            <p>Passionnée par les nouvelles technologies , j'ai acquis une solide expérience dans l'informatique et legaltech, l'analyse des données. Mon parcours professionnel m'a permis de développer des compétences en création de contenu, en gestion de projets et Sècuritè informatique, me permettant ainsi de contribuer efficacement à l'augmentation de la visibilité et des performances des entreprises avec lesquelles j'ai fait mes stages.</p>
+        </section>
+
+        <section id="identite">
+            <h2><i class="fas fa-id-card" style="color: var(--secondary); margin-right: 10px;"></i>identitè</h2>
+            <ul>
+                <li><strong> Prènom :</strong> Adji Fatou</li>
+                <li><strong> Nom :</strong> GUEYE</li>
+                <li><strong> Adresse :</strong> Rufisque</li>
+                <li><strong>Téléphone :</strong> 776908154</li>
+                <li><strong>E-mail :</strong> <a href="adjifatougueye89@gmail.com">adjifatougueye89@gmail.com</a></li>
+                <li><strong>Âge :</strong> 20 ans</li>
+                <li><strong>Situation matrimoniale :</strong> Célibataire</li>
+            </ul>
+        </section>
+
+        <section id="parcours">
+            
+            <h2><i class="fas fa-graduation-cap" style="color: var(--secondary); margin-right: 10px;"></i>Formations et Diplômes Obtenus </h2>
+            <p>2024-2025 : Licence 2 en cours Gènie informatique à l'univers professionnel Unipro Sacrè Coeur Extension 3 Sur la route VDN</li>
+            <p>2022-2023 : Bac au Lycèe abdoulaye sadji de Rufisque</p>
+            <p>2019-2020 : BFM au Lycèe Mame yelli badiane de Pikine</p>
+            <p>2015-2016 : CFEE à L'ècole privèe les praticiens de Pikine</p>
+    
+    </section>
+
+        <section id="projets">
+            <h2><i class="fas fa-briefcase" style="color: var(--secondary); margin-right: 10px;"></i>Projets</h2>
+            <p>Comme toute personne à des visions, Étant étudiante en 2ème année en génie informatique , j’ai choisi cette filière car je suis toujours passionnée par l'informatique. Comme l’informatique est un métier prometteur, d’ici 5 ans je souhaite vraiment Devenir une Grande Ingènieur en Cyber Sècuritè, être à la hauteur de ma personne, travailler en freelance et participer au développement de mon pays.</p>
+        </section>
+
+        <section id="experience">
+            <h2><i class="fas fa-cogs" style="color: var(--secondary); margin-right: 10px;"></i>Expèrience Professionnelle :</h2>
+            <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center;">
+                <div style="flex: 1; min-width: 280px;">
+                    <ul>
+                        <li>Cyber Sècuritè</li>
+                        <li>E-commerce</li>
+                        <li>Maintenance Informatique</li>
+                        <li>Développement Web</li>
+                        <li>Réseau Informatique</li>
+                    </ul>
+                    <p>J'ai acquis une expérience professionnelle significative dans le domaine de la Cyber Sècuritè appliquée au secteur E-commerce, incluant la gestion des risques, la protection des données sensibles et la mise en place de solutions sécurisées pour les plateformes en ligne.</p>
+                </div>
+                <div style="flex: 1; min-width: 280px; text-align: center;">
+                    <img id="img1" src="c:\Users\UN-CHK\Desktop\OIP.jpeg " alt="Cyber Sècuritè et E-commerce" style="max-width: 100%; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    <img id="img2" src="c:\Users\UN-CHK\Desktop\9-principes-generaux-de-prevention-PGP_hu1f72baf79bb2b3de46547e4727a150c0_167017_840x0_resize_q90_lanczos_3.png" alt="E-commerce" style="max-width: 100%; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                </div>
+            
+                </div>
+            </div>
+        </section>
+        <style>
+            @keyframes floatUpDown {
+                0%, 100% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(-20px);
+                }
+            }
+            #img1, #img2 {
+                animation: floatUpDown 4s ease-in-out infinite;
+            }
+            #img2 {
+                animation-delay: 2s;
+            }
+        </style>
+        
+        <section id="message">
+            <h2>Contactez-moi</h2>
+            <form id="message-form" style="max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px;">
+                <label for="prenom" style="font-size: 1.1rem; cursor: pointer;">Prénom :</label>
+                <input type="text" id="prenom" name="prenom" required style="padding: 12px; border-radius: 8px; border: 1px solid var(--secondary); font-size: 1rem;" autocomplete="given-name" autocapitalize="words" spellcheck="false" placeholder="Votre prénom" tabindex="1">
+                
+                <label for="nom" style="font-size: 1.1rem; cursor: pointer;">Nom :</label>
+                <input type="text" id="nom" name="nom" required style="padding: 12px; border-radius: 8px; border: 1px solid var(--secondary); font-size: 1rem;" autocomplete="family-name" autocapitalize="words" spellcheck="false" placeholder="Votre nom" tabindex="2">
+                
+                <label for="email" style="font-size: 1.1rem; cursor: pointer;">Email :</label>
+                <input type="email" id="email" name="email" required style="padding: 12px; border-radius: 8px; border: 1px solid var(--secondary); font-size: 1rem;" autocomplete="email" autocorrect="off" spellcheck="false" placeholder="exemple@domaine.com" tabindex="3">
+                
+                <label for="telephone" style="font-size: 1.1rem; cursor: pointer;">Téléphone :</label>
+                <input type="tel" id="telephone" name="telephone" required style="padding: 12px; border-radius: 8px; border: 1px solid var(--secondary); font-size: 1rem;" autocomplete="tel" pattern="[0-9\s\-\+\(\)]{7,15}" placeholder="telephone" tabindex="4">
+                
+                <label for="message-content" style="font-size: 1.1rem; cursor: pointer;">Message :</label>
+                <textarea id="message-content" name="message" rows="5" required style="padding: 12px; border-radius: 8px; border: 1px solid var(--secondary); font-size: 1rem;" placeholder="Votre message ici..." tabindex="5"></textarea>
+                
+                <button type="submit" class="btn" style="width: fit-content; align-self: center; cursor: pointer;" tabindex="6">Envoyer</button>
+            </form>
+        </section>
+        <script>
+            // Add click event listeners to labels to focus corresponding inputs for easier writing
+            document.addEventListener('DOMContentLoaded', () => {
+                const labels = document.querySelectorAll('#message label');
+                labels.forEach(label => {
+                    label.style.cursor = 'pointer';
+                    label.addEventListener('click', () => {
+                        const inputId = label.getAttribute('for');
+                        const input = document.getElementById(inputId);
+                        if (input) {
+                            input.focus();
+                        }
+                    });
+                });
+            });
+        </script>
+    </main>
+
+    <footer>
+        <h3>Contact</h3>
+        <p>Téléphone : +221 776908154</p>
+        <p>E-mail : <a href="mailto:adjifatougueye89@gmail.com">adjifatougueye89@gmail.com</a></p>
+        <p>© 2025 Adji Fatou Gueye</p>
+        <div class="social-icons">
+            
+            <a href="https://github.com/adjaFatouGueye26" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/adji-fatou-gueye-" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.Snapchat.com/adjisaliou" target="_blank" title="Snapchat"><i class="fab fa-snapchat"></i></a>
+            <a href="https://www.facebook.com/share/19ktUTyKA6/?mibextid=wwXIfr" target="_blank" title="facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/adji_fatou_" target="_blank" title="instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            // Vérifier le thème sauvegardé
+            if (localStorage.getItem('theme') === 'dark') {
+                body.classList.add('dark-mode');
+            }
+
+            // Basculement du thème
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                const isDark = body.classList.contains('dark-mode');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+
+            // Formulaire de message
+            const messageForm = document.getElementById('message-form');
+            if (messageForm) {
+                messageForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Message envoyé !');
+                    messageForm.reset();
+                });
+            }
+
+            // Navigation fluide (commented out for performance testing)
+            // const links = document.querySelectorAll('a');
+            // links.forEach(link => {
+            //     link.addEventListener('click', (e) => {
+            //         const href = link.getAttribute('href');
+            //         if (href.startsWith('#')) {
+            //             e.preventDefault();
+            //             document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+            //         }
+            //     });
+            // });
+
+        });
+        // Example of triggering exit animation after 5 seconds (optional)
+        const animatedName = document.querySelector('.animated-name');
+
+        function animateNameLoop() {
+            animatedName.classList.remove('loop-exit');
+            animatedName.classList.add('loop-entry');
+
+            setTimeout(() => {
+                animatedName.classList.remove('loop-entry');
+                animatedName.classList.add('loop-exit');
+            }, 3000); // Duration of entry animation + visible time
+
+            setTimeout(() => {
+                animateNameLoop();
+            }, 5000); // Total duration of one loop cycle
+        }
+
+        animateNameLoop();
+    </script>
+</body>
+</html>
